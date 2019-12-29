@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.createGroupController">
+   <children>
+      <TextField fx:id="tfGroupName" layoutX="222.0" layoutY="48.0" />
+      <Button fx:id="btCreate" layoutX="247.0" layoutY="94.0" mnemonicParsing="false" onAction="#addGroup" prefHeight="36.0" prefWidth="106.0" text="Create Group" />
+      <Label layoutX="228.0" layoutY="24.0" text="Group's name" />
+      <ListView fx:id="lvUser" layoutX="6.0" layoutY="6.0" prefHeight="391.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>
