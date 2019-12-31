@@ -2,13 +2,22 @@ package com.chat.app.process;
 
 
 
+import com.chat.app.view.createGroupController;
 import com.chat.app.view.homeController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class ReadThread extends Thread {
@@ -37,6 +46,11 @@ public class ReadThread extends Thread {
                 splited = response.split("\\|");
                 System.out.println("Received: " + response);
 
+                if (response.startsWith("*luig")){
+                    Client.home.showAddMemberGUI(splited);
+//                    System.out.println(response);
+
+                }
 
                 if (response.startsWith("*userquit")){
                     Client.UserMessages.remove(splited[1]);
@@ -51,7 +65,13 @@ public class ReadThread extends Thread {
                 }
 
                 if (response.startsWith("*newgroup")){
+                    Set<String> members = new HashSet<>();
+                    for(int i = 2; i<splited.length; i++){
+                        members.add(splited[i]);
+                    }
+                    System.out.println(members);
                     Client.GroupMessages.put(splited[1], "");
+                    Client.GroupMembers.put(splited[1], members);
                     Client.home.refreshListView();
                     continue;
                 }
@@ -73,6 +93,7 @@ public class ReadThread extends Thread {
             }
         }
     }
+
 
 }
 

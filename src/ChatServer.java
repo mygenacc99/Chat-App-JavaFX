@@ -88,7 +88,6 @@ public class ChatServer {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
             System.out.println("Server is listening on port " + port);
-
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("New user connected");
@@ -110,7 +109,7 @@ public class ChatServer {
     }
 
 
-    void senToUser(String message, String user){
+    void sendToUser(String message, String user){
         for (UserThread aUser : userThreads) {
             String currName = aUser.getUserName();
             if (currName.equals(user)) {
@@ -131,7 +130,7 @@ public class ChatServer {
 
         user.forEach((String username) -> {
             if (!excludeUser.equals(username)) {
-                senToUser(message, username);
+                sendToUser(message, username);
             }
         });
 
@@ -141,8 +140,12 @@ public class ChatServer {
         this.Users.add(user);
     }
 
-    void addGroup(String name, Set<String> Users) {
-        this.Groups.put(name, Users);
+    void CustomizeGroup(String name, Set<String> Users) {
+        if (!Groups.containsKey(name))
+            this.Groups.put(name, Users);
+        else{
+            Groups.get(name).addAll(Users);
+        }
     }
 
     void addUserToGroup(String name, String user){
@@ -158,6 +161,16 @@ public class ChatServer {
 
     public Map<String, Set<String>> getGroups() {
         return Groups;
+    }
+
+    public String getListUserInGroup(String groupName){
+        String[] rs = {""};
+        if (Groups.containsKey(groupName)){
+            Groups.get(groupName).forEach((String user) -> {
+                rs[0] = rs[0] + (user + "|");
+            });
+        }
+        return rs[0];
     }
 
     public void removeUserFromGroup(String groupname, String username){

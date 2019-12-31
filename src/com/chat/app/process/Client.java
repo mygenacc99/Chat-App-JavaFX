@@ -6,10 +6,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Client {
     public static String hostName = "localhost";
@@ -21,6 +18,7 @@ public class Client {
     public static Stage loginStage;
     public static Map<String, String> UserMessages = new HashMap<String, String>();
     public static Map<String, String> GroupMessages = new HashMap<String, String>();
+    public static Map<String, Set<String>> GroupMembers = new HashMap<>();
     public static homeController home;
 
     public static void init() {

@@ -3,17 +3,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ChatApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Client.loginStage = primaryStage;
+
         Parent root = FXMLLoader.load(getClass().getResource("com/chat/app/view/login.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene((root));
+        primaryStage.setScene(scene);
         primaryStage.show();
+        Client.loginStage = primaryStage;
     }
 
 

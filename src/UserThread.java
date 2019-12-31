@@ -44,7 +44,7 @@ public class UserThread extends Thread {
             for(String user:server.getUsers()){
                 serverMessage += user + "|";
             }
-            server.senToUser(serverMessage, userName);
+            server.sendToUser(serverMessage, userName);
             server.sendToAllUser("*newuser"+userName, this);
             server.addUser(userName);
 
@@ -55,6 +55,8 @@ public class UserThread extends Thread {
                 clientCommand = reader.readLine();
                 System.out.println("Client sended:" + clientCommand);
                 splited = clientCommand.split("\\|");
+
+
                 if(clientCommand.equals("bye")){
                     server.sendToAllUser("*userquit|"+userName, this);
                     break;
@@ -72,8 +74,8 @@ public class UserThread extends Thread {
                     for(int i = 2; i<splited.length; i++){
                         listMember.add(splited[i]);
                     }
-                    server.addGroup(splited[1], listMember);
-                    server.sendToGroup("*newgroup|" + splited[1], userName, splited[1]);
+                    server.CustomizeGroup(splited[1], listMember);
+                    server.sendToGroup("*newgroup|" + splited[1] +"|" + server.getListUserInGroup(splited[1]), userName, splited[1]);
 
                     continue;
                 }
@@ -84,10 +86,19 @@ public class UserThread extends Thread {
                     continue;
                 }
 
+                if(clientCommand.startsWith("+groupmem")){
+
+                }
+
+                if (clientCommand.startsWith("*luig")){ // *luig|groupname
+                    String list = server.getListUserInGroup(splited[1]);
+                    writer.println("*luig|" + splited[1] +"|"+ list);
+                }
+
                 // splited[0]: receiver, [1]: message
                 if(splited.length < 2) continue;
                 serverMessage = uName + "|" + splited[1]; // Format: [name]: message
-                server.senToUser(serverMessage, splited[0]);
+                server.sendToUser(serverMessage, splited[0]);
 
             } while (true);
 
