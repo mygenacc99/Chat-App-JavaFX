@@ -4,6 +4,7 @@ package com.chat.app.process;
 
 import com.chat.app.view.createGroupController;
 import com.chat.app.view.homeController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +37,7 @@ public class ReadThread extends Thread {
         }
     }
 
+
     public void run() {
         String splited[];
         while (!Thread.currentThread().isInterrupted()) {
@@ -46,11 +48,8 @@ public class ReadThread extends Thread {
                 splited = response.split("\\|");
                 System.out.println("Received: " + response);
 
-                if (response.startsWith("*luig")){
-                    Client.home.showAddMemberGUI(splited);
-                }
-
                 if (response.startsWith("*userquit")){ // *userquit|username
+
                     Client.UserMessages.remove(splited[1]);
 
                     final String quittedUser = splited[1];
@@ -64,21 +63,49 @@ public class ReadThread extends Thread {
                         }
 
                     });
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Client.home.refreshListUserGroup();
+                                Client.home.refreshChatBox();
+                                Client.home.refreshListView();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    Platform.runLater(updater);
 
-                    Client.home.refreshChatBox();
-                    Client.home.refreshListView();
-                    Client.home.refreshListUserGroup();
                     continue;
                 }
 
                 if(response.startsWith("*quitgroup")){
                     Client.GroupMembers.get(splited[1]).remove(splited[2]);
-                    Client.home.refreshListUserGroup();
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            Client.home.refreshListUserGroup();
+                        }
+                    };
+                    Platform.runLater(updater);
                 }
 
                 if(response.startsWith("*newuser")){
                     String newUser = response.substring(8);
-                    Client.home.addUser(newUser);
+
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Client.home.addUser(newUser);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    Platform.runLater(updater);
+
                     continue;
                 }
 
@@ -101,7 +128,19 @@ public class ReadThread extends Thread {
                         });
                     }
                     Client.GroupMembers.put(groupName, members);
-                    Client.home.refreshListView();
+
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Client.home.refreshListView();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    Platform.runLater(updater);
+
                     continue;
                 }
 
@@ -109,12 +148,25 @@ public class ReadThread extends Thread {
                     if(splited.length<3) continue;
                     String old = Client.GroupMessages.get(splited[1]);
                     Client.GroupMessages.replace(splited[1], old + "\n" + splited[2]);
-                    Client.home.refreshChatBox();
+
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            Client.home.refreshChatBox();
+                        }
+                    };
+                    Platform.runLater(updater);
                     continue;
                 }
 
                 Client.home.addMessage( splited[1], splited[0]);
-                Client.home.refreshChatBox();
+                Runnable updater = new Runnable() {
+                    @Override
+                    public void run() {
+                        Client.home.refreshChatBox();
+                    }
+                };
+                Platform.runLater(updater);
             } catch (IOException ex) {
                 System.out.println("Error reading from server: " + ex.getMessage());
                 ex.printStackTrace();

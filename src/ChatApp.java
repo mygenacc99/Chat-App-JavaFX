@@ -16,6 +16,7 @@ public class ChatApp extends Application {
         primaryStage.setTitle("Hello World");
         Scene scene = new Scene((root));
         primaryStage.setScene(scene);
+        primaryStage.setTitle("");
         primaryStage.show();
         Client.loginStage = primaryStage;
     }

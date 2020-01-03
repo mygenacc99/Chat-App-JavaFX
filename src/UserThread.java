@@ -87,11 +87,6 @@ public class UserThread extends Thread {
                     continue;
                 }
 
-                if (clientCommand.startsWith("*luig")){ // *luig|groupname
-                    String list = server.getListUserInGroup(splited[1]);
-                    writer.println("*luig|" + splited[1] +"|"+ list);
-                }
-
                 // splited[0]: receiver, [1]: message
                 if(splited.length < 2) continue;
                 serverMessage = uName + "|" + splited[1]; // Format: [name]: message

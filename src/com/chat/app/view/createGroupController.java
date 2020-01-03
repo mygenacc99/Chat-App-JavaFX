@@ -69,7 +69,7 @@ public class createGroupController implements Initializable {
 
     }
 
-    public void setInfo(String groupName) {
+    public synchronized void setInfo(String groupName) {
         isCreate = false;
         tfGroupName.setText(groupName);
         tfGroupName.setDisable(true);
@@ -84,7 +84,7 @@ public class createGroupController implements Initializable {
         lvUser.setItems(Oball);
     }
 
-    public void CustomizeGroup() throws IOException {
+    public synchronized void CustomizeGroup() throws IOException {
         Set<String> set = new HashSet<>(this.list);
         String selectedUsers = Client.userName + "|";
         String groupName = tfGroupName.getText();
