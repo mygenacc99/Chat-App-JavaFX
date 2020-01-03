@@ -96,7 +96,8 @@ public class createGroupController implements Initializable {
         for (String user : set) {
             selectedUsers += user + "|";
         }
-        Client.writer.println("*newgroup|" + groupName + "|" + selectedUsers);  // *newgroup|groupname|name1|name2|...|
+        String command = "*newgroup|" + groupName + "|" + selectedUsers;
+        Client.sendCommandToServer(command);  // *newgroup|groupname|name1|name2|...|
         Client.home.refreshListView();
         this.cG.close();
 

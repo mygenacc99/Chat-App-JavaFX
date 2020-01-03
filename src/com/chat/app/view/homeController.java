@@ -128,8 +128,8 @@ public class homeController implements Initializable {
 
         taMessages.setText(taMessages.getText() + "\n" + mess);
         if (isUserChat) {
-            command = mess + "|" + receiverName;
-            Client.sendCommandToServer(mess);
+            command = "*sendUser" + "|" + receiverName +"|" + mess;
+            Client.sendCommandToServer(command);
             addMessage(mess, receiverName);
         } else {
             command = "*sendgroup|" + receiverName + "|" + mess;

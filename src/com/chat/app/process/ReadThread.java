@@ -176,14 +176,18 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                Client.home.addMessage(splited[1], splited[0]);
-                Runnable updater = new Runnable() {
-                    @Override
-                    public void run() {
-                        Client.home.refreshChatBox();
-                    }
-                };
-                Platform.runLater(updater);
+                if (response.startsWith("*sendUser")){
+                    Client.home.addMessage(splited[2], splited[1]);
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            Client.home.refreshChatBox();
+                        }
+                    };
+                    Platform.runLater(updater);
+                    continue;
+                }
+
             }
             socket.close();
         } catch (IOException ex) {

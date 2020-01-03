@@ -82,10 +82,12 @@ public class UserThread extends Thread {
                     continue;
                 }
 
-                // splited[0]: receiver, [1]: message
-                if(splited.length < 2) continue;
-                serverMessage = userName + "|" + splited[1]; // Format: [name]: message
-                server.sendToUser(serverMessage, splited[0]);
+                if(clientCommand.startsWith("*sendUser")){
+                    if(splited.length < 3) continue;
+                    serverMessage = "*sendUser"+"|"+userName + "|" + splited[2]; // Format: [name]: message
+                    server.sendToUser(serverMessage, splited[1]);
+                    continue;
+                }
 
             } while (true);
 
