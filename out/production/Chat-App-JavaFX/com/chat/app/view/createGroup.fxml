@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.createGroupController">
+<AnchorPane prefHeight="523.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.createGroupController">
    <children>
-      <TextField fx:id="tfGroupName" layoutX="222.0" layoutY="48.0" />
-      <Button fx:id="btCreate" layoutX="247.0" layoutY="94.0" mnemonicParsing="false" onAction="#CustomizeGroup" prefHeight="36.0" prefWidth="106.0" text="Create Group" />
-      <Label layoutX="228.0" layoutY="24.0" text="Group's name" />
-      <ListView fx:id="lvUser" layoutX="6.0" layoutY="6.0" prefHeight="391.0" prefWidth="200.0" />
-      <ListView fx:id="lvSelectedUser" layoutX="208.0" layoutY="173.0" prefHeight="225.0" prefWidth="200.0" />
-      <Label layoutX="320.0" layoutY="151.0" text="List member" />
+      <TextField fx:id="tfGroupName" layoutX="222.0" layoutY="49.0" prefHeight="45.0" prefWidth="294.0" />
+      <Button fx:id="btCreate" layoutX="226.0" layoutY="104.0" mnemonicParsing="false" onAction="#CustomizeGroup" prefHeight="33.0" prefWidth="86.0" style="-fx-background-color: #2580db;" text="Create" textFill="WHITE">
+         <font>
+            <Font name="UTMAvoBold" size="14.0" />
+         </font></Button>
+      <Label layoutX="218.0" layoutY="14.0" text="Group's name">
+         <font>
+            <Font name="UTM Avo" size="22.0" />
+         </font></Label>
+      <ListView fx:id="lvUser" fixedCellSize="0.0" layoutX="-1.0" prefHeight="523.0" prefWidth="207.0" style="-fx-font-size: 20.0; -fx-text-fill: white;" />
+      <ListView fx:id="lvSelectedUser" fixedCellSize="0.0" layoutX="214.0" layoutY="243.0" prefHeight="276.0" prefWidth="316.0" style="-fx-font-size: 20.0;" />
+      <Label layoutX="214.0" layoutY="204.0" text="List member">
+         <font>
+            <Font name="UTM Avo" size="22.0" />
+         </font></Label>
    </children>
 </AnchorPane>

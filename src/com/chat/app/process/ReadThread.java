@@ -48,14 +48,32 @@ public class ReadThread extends Thread {
 
                 if (response.startsWith("*luig")){
                     Client.home.showAddMemberGUI(splited);
-//                    System.out.println(response);
-
                 }
 
-                if (response.startsWith("*userquit")){
+                if (response.startsWith("*userquit")){ // *userquit|username
                     Client.UserMessages.remove(splited[1]);
+
+                    final String quittedUser = splited[1];
+
+                    Client.GroupMembers.keySet().forEach((String groupName) -> {
+                        if (Client.GroupMembers.get(groupName).contains(quittedUser)){
+
+                            String old = Client.GroupMessages.get(groupName);
+                            Client.GroupMessages.replace(groupName, old + "\n" + quittedUser + " has quit!");
+                            Client.GroupMembers.get(groupName).remove(quittedUser);
+                        }
+
+                    });
+
+                    Client.home.refreshChatBox();
                     Client.home.refreshListView();
+                    Client.home.refreshListUserGroup();
                     continue;
+                }
+
+                if(response.startsWith("*quitgroup")){
+                    Client.GroupMembers.get(splited[1]).remove(splited[2]);
+                    Client.home.refreshListUserGroup();
                 }
 
                 if(response.startsWith("*newuser")){
@@ -65,13 +83,24 @@ public class ReadThread extends Thread {
                 }
 
                 if (response.startsWith("*newgroup")){
+                    final String groupName = splited[1];
                     Set<String> members = new HashSet<>();
                     for(int i = 2; i<splited.length; i++){
                         members.add(splited[i]);
                     }
                     System.out.println(members);
-                    Client.GroupMessages.put(splited[1], "");
-                    Client.GroupMembers.put(splited[1], members);
+                    if (!Client.GroupMessages.containsKey(groupName)){
+                        Client.GroupMessages.put(groupName, groupName + " has created!");
+                    }
+                    else{
+                        members.forEach((String username) ->{
+                            if(!Client.GroupMembers.get(groupName).contains(username)){
+                                String old = Client.GroupMessages.get(groupName);
+                                Client.GroupMessages.replace(groupName, old + "\n" + username + " has joined!");
+                            }
+                        });
+                    }
+                    Client.GroupMembers.put(groupName, members);
                     Client.home.refreshListView();
                     continue;
                 }

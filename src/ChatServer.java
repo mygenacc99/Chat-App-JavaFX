@@ -148,12 +148,6 @@ public class ChatServer {
         }
     }
 
-    void addUserToGroup(String name, String user){
-        if (Groups.containsKey(name)){
-            Groups.get(name).add(user);
-        }
-
-    }
 
     public Set<String> getUsers() {
         return Users;
@@ -177,8 +171,6 @@ public class ChatServer {
         Groups.get(groupname).remove(username);
     }
 
-
-
     public void removeUser(String user, UserThread aUser) {
         Users.remove(user);
         userThreads.remove(aUser);
@@ -190,11 +182,6 @@ public class ChatServer {
     }
 
 
-
-
-    boolean hasUsers() {
-        return !this.Users.isEmpty();
-    }
 }
 
 //class ProcessingThread extends Thread{

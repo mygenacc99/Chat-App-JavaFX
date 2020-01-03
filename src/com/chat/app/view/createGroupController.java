@@ -88,7 +88,10 @@ public class createGroupController implements Initializable {
         Set<String> set = new HashSet<>(this.list);
         String selectedUsers = Client.userName + "|";
         String groupName = tfGroupName.getText();
-        Client.GroupMessages.put(groupName, "");
+        if( !Client.GroupMessages.containsKey(groupName)){
+            Client.GroupMessages.put(groupName,groupName + " has created!");
+        }
+
         Client.GroupMembers.put(groupName, set);
         for(String user : set) {
             selectedUsers += user + "|";

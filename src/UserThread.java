@@ -41,7 +41,7 @@ public class UserThread extends Thread {
                 And save the new user
              */
             String serverMessage = "";
-            for(String user:server.getUsers()){
+            for(String user:server.getUsers()){  // Get all users on server.
                 serverMessage += user + "|";
             }
             server.sendToUser(serverMessage, userName);
@@ -63,7 +63,8 @@ public class UserThread extends Thread {
                 }
 
                 if(clientCommand.startsWith("*quitgroup")){
-                    server.sendToGroup("*sendgroup|"+splited[1]+"|"+userName+ " has quitted!",userName, splited[1]);
+                    server.sendToGroup("*sendgroup|"+splited[1]+"|"+userName+ " has quit!",userName, splited[1]);
+                    server.sendToGroup("*quitgroup|"+splited[1]+"|"+userName, userName, splited[1]);
                     server.removeUserFromGroup(splited[1], userName);
                     continue;
                 }
@@ -86,10 +87,6 @@ public class UserThread extends Thread {
                     continue;
                 }
 
-                if(clientCommand.startsWith("+groupmem")){
-
-                }
-
                 if (clientCommand.startsWith("*luig")){ // *luig|groupname
                     String list = server.getListUserInGroup(splited[1]);
                     writer.println("*luig|" + splited[1] +"|"+ list);
@@ -105,23 +102,9 @@ public class UserThread extends Thread {
             server.removeUser(uName, this);
             socket.close();
 
-//            serverMessage = uName + " has quitted.";
-//            server.broadcast(serverMessage, this);
-
         } catch (IOException ex) {
             System.out.println("Error in UserThread: " + ex.getMessage());
             ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Sends a list of online users to the newly connected user.
-     */
-    void printUsers() {
-        if (server.hasUsers()) {
-            writer.println("Connected users: " + server.getUsers());
-        } else {
-            writer.println("No other users connected");
         }
     }
 
@@ -132,15 +115,5 @@ public class UserThread extends Thread {
         writer.println(message);
     }
 
-    /*
-        command has format like: *newgroup|group's name| user's name 1| user's name 2|...
-     */
-    public void addGroup(String command){
-        String splited[] = command.split("\\|");
-        String grroupName = splited[1];
-
-
-
-    }
 }
 

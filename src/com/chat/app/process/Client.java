@@ -31,8 +31,6 @@ public class Client {
             InputStream is = socket.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is));
 
-//            new ReadThread(socket, this).start();
-//            new WriteThread(socket, this).start();
 
         } catch (UnknownHostException ex) {
             System.out.println("Server not found: " + ex.getMessage());

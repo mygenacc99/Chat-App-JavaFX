@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,25 +12,35 @@
 
 <AnchorPane prefHeight="945.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.homeController">
    <children>
-      <SplitPane dividerPositions="0.17706013363028952" prefHeight="945.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.2505567928730512" prefHeight="945.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="943.0" prefWidth="509.0">
                <children>
-                  <Label fx:id="lbUser" alignment="CENTER" layoutX="8.0" layoutY="7.0" prefHeight="58.0" prefWidth="140.0">
+                  <Label fx:id="lbUser" alignment="CENTER" layoutX="-4.0" layoutY="-1.0" prefHeight="58.0" prefWidth="156.0" style="-fx-background-color: #2580db;" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="885.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <SplitPane dividerPositions="0.5" layoutY="56.0" orientation="VERTICAL" prefHeight="872.0" prefWidth="155.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                  <SplitPane dividerPositions="0.5" layoutY="56.0" orientation="VERTICAL" prefHeight="891.0" prefWidth="222.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="140.0">
                            <children>
-                              <ListView fx:id="lvUser" layoutY="58.0" prefHeight="414.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ListView fx:id="lvUser" fixedCellSize="0.0" layoutY="58.0" prefHeight="414.0" prefWidth="140.0" style="-fx-background-color: #f5f5f5; -fx-font-size: 20.0;" styleClass="pretty-list-view" stylesheets="@../../../../../../../src/com/chat/app/view/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="140.0">
+                      <AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="220.0">
                            <children>
-                              <ListView fx:id="lvGroup" layoutX="-30.0" layoutY="14.0" prefHeight="367.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ListView fx:id="lvGroup" fixedCellSize="0.0" layoutX="-30.0" layoutY="56.0" prefHeight="352.0" prefWidth="220.0" style="-fx-background-color: #f5f5f5; -fx-font-size: 20.0;" styleClass="pretty-list-view" stylesheets="@../../../../../../../src/com/chat/app/view/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0" />
+                              <Label alignment="CENTER" prefHeight="58.0" prefWidth="220.0" style="-fx-background-color: #2580DB;" text="Group" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="383.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="-1.0" layoutY="391.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #e05151;" text="Exit" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="391.0">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                     </items>
@@ -36,37 +49,75 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="943.0" prefWidth="288.0">
                <children>
-                  <Label fx:id="lbReceive" alignment="CENTER" layoutY="7.0" prefHeight="42.0" prefWidth="735.0" textAlignment="CENTER">
+                  <TextArea fx:id="taSend" disable="true" layoutY="768.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="121.0" prefWidth="566.0" promptText="Enter your message..." style="-fx-border-color: #2580db; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-color: #dbdbdb;">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="22.0" />
+                     </font>
+                  </TextArea>
+                  <Button fx:id="btSend" alignment="CENTER_RIGHT" layoutX="564.0" layoutY="766.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#sendMessage" prefHeight="121.0" prefWidth="89.0" style="-fx-background-color: Transparent; -fx-background-repeat: no-repeat; -fx-border-color: none; -fx-opacity: 1; -fx-rotate: 90;" text="◮" textFill="#2580db" textOverrun="CLIP">
+                     <font>
+                        <Font size="56.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </Button>
+                  <Label alignment="CENTER" layoutY="889.0" minHeight="0.0" minWidth="0.0" prefHeight="3.0" prefWidth="736.0" style="-fx-background-color: #2580db;" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="UTM Avo" size="24.0" />
                      </font>
                   </Label>
-                  <GridPane layoutX="38.0" layoutY="55.0" prefHeight="888.0" prefWidth="735.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="10.0" prefWidth="379.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.0" minWidth="10.0" prefWidth="295.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.0" minWidth="10.0" prefWidth="180.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="688.0" minHeight="10.0" prefHeight="646.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="205.0" minHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <TextArea fx:id="taMessages" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="510.0" prefWidth="318.0" GridPane.columnSpan="2" />
-                        <TextArea fx:id="taSend" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="241.0" GridPane.rowIndex="1" />
-                        <Button fx:id="btSend" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendMessage" prefHeight="118.0" prefWidth="261.0" text="◮" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btAddMember" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addMemberToGroup" prefHeight="105.0" prefWidth="246.0" text="Add Member" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Button fx:id="btQuitGroup" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quitGroup" prefHeight="127.0" prefWidth="260.0" text="Quit Group" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createGroup" prefHeight="128.0" prefWidth="277.0" text="Create Group" GridPane.rowIndex="2" />
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" prefHeight="80.0" prefWidth="251.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ListView fx:id="lvGroupMembers" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="2" />
-                     </children>
-                  </GridPane>
+                  <Label alignment="CENTER" layoutY="896.0" minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="736.0" style="-fx-background-color: #2580db;" text="Copyright 2020 | HF Team" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="UTM Avo" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbReceive" alignment="CENTER" layoutY="-7.0" prefHeight="64.0" prefWidth="670.0" style="-fx-background-color: #2580db;" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="886.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0">
+                     <font>
+                        <Font name="UTM Avo" size="24.0" />
+                     </font>
+                  </Label>
+                  
+                  <Button layoutX="603.0" layoutY="-13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createGroup" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: Transparent;" text="+" textFill="WHITE">
+                     <font>
+                        <Font name="UTMAvoBold" size="31.0" />
+                     </font></Button>
+                  <SplitPane dividerPositions="0.7455089820359282" layoutY="57.0" prefHeight="712.0" prefWidth="670.0" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="lbMessages" alignment="TOP_LEFT" layoutX="197.0" layoutY="157.0" prefHeight="710.0" prefWidth="493.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              
+                                <ListView fx:id="lvGroupMembers" fixedCellSize="0.0" prefHeight="717.0" prefWidth="173.0" style="-fx-font-size: 20.0;" visible="false" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                        <Button fx:id="btQuitGroup" layoutX="509.0" layoutY="723.0" mnemonicParsing="false" onAction="#quitGroup" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #e05151;" text="Quit Group" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                      <Button fx:id="btAddMember" layoutX="510.0" layoutY="674.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addMemberToGroup" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #2580db;" text="Add Member" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </items>

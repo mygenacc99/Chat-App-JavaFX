@@ -7,46 +7,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.loginController">
+<AnchorPane prefHeight="758.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.loginController">
    <children>
-      <Label layoutX="35.0" layoutY="122.0" text="Name">
+      <AnchorPane layoutX="-7.0" prefHeight="758.0" prefWidth="383.0" style="-fx-background-color: #2580db;">
+         <children>
+            <Label layoutX="28.0" layoutY="274.0" text="CHAT APP" textFill="WHITE">
+               <font>
+                  <Font name="UTMAvoBold" size="63.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="402.0" layoutY="215.0" text="Username">
          <font>
-            <Font size="26.0" />
+            <Font name="UTM Avo" size="22.0" />
          </font>
       </Label>
-      <Label layoutX="224.0" layoutY="21.0" text="LOGIN">
+      <Label layoutX="541.0" layoutY="87.0" text="SIGN IN">
          <font>
-            <Font size="48.0" />
+            <Font name="UTMAvoBold" size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="tfName" layoutX="185.0" layoutY="113.0" prefHeight="25.0" prefWidth="383.0">
+      <TextField fx:id="tfName" layoutX="402.0" layoutY="257.0" prefHeight="56.0" prefWidth="444.0" style="-fx-border-color: #2580db; -fx-border-style: none none solid none; -fx-border-width: 2; -fx-background-color: none;">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
-      <TextField fx:id="tfPass" layoutX="185.0" layoutY="176.0" prefHeight="25.0" prefWidth="383.0">
+      <TextField fx:id="tfPass" layoutX="402.0" layoutY="366.0" prefHeight="56.0" prefWidth="444.0" style="-fx-border-color: #2580db; -fx-border-style: none none solid none; -fx-border-width: 2; -fx-background-color: none;">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
-      <Label layoutX="35.0" layoutY="185.0" text="Password">
+      <Label layoutX="402.0" layoutY="328.0" text="Password">
          <font>
-            <Font size="26.0" />
+            <Font name="UTM Avo" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="btLogin" layoutX="353.0" layoutY="295.0" mnemonicParsing="false" onAction="#loginButtonClick" text="Login">
+      <Button fx:id="btLogin" layoutX="650.0" layoutY="470.0" mnemonicParsing="false" onAction="#loginButtonClick" style="-fx-background-color: #2580db;" text="Login" textFill="WHITE">
          <font>
-            <Font size="26.0" />
+            <Font name="UTM Avo" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btRegister" layoutX="185.0" layoutY="295.0" mnemonicParsing="false" text="Register">
+      <Button fx:id="btRegister" layoutX="497.0" layoutY="470.0" mnemonicParsing="false" style="-fx-background-color: #2580db;" text="Register" textFill="WHITE">
          <font>
-            <Font size="26.0" />
+            <Font name="UTM Avo" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btExit" layoutX="489.0" layoutY="295.0" mnemonicParsing="false" text="Exit">
+      <Button fx:id="btExit" layoutX="-8.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="41.0" style="-fx-background-color: Transparent;" text="x" textFill="WHITE">
          <font>
-            <Font size="26.0" />
+            <Font name="UTMAvoBold" size="33.0" />
          </font>
       </Button>
    </children>
