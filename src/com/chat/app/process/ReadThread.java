@@ -74,7 +74,6 @@ public class ReadThread extends Thread {
 
                     Client.GroupMembers.keySet().forEach((String groupName) -> {
                         if (Client.GroupMembers.get(groupName).contains(quittedUser)) {
-
                             String old = Client.GroupMessages.get(groupName);
                             Client.GroupMessages.replace(groupName, old + "\n" + quittedUser + " has quit!");
                             Client.GroupMembers.get(groupName).remove(quittedUser);

@@ -41,10 +41,6 @@ public class Client {
         }
     }
 
-    public static void loginCommand(){
-        writer.println("*userLogin" + "|" + userName);
-    }
-
     public static void sendCommandToServer(String command){
         writer.println(command);
     }

@@ -24,7 +24,8 @@ public class loginController {
         Client.userName = username;
         Client.login = this;
         Client.init();
-        Client.loginCommand();
+        String command ="*userLogin" + "|" + username;
+        Client.sendCommandToServer(command);
     }
 
     public void loginFail(){
