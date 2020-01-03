@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="523.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chat.app.view.createGroupController">
    <children>
       <TextField fx:id="tfGroupName" layoutX="214.0" layoutY="50.0" prefHeight="45.0" prefWidth="294.0" />
-      <Button fx:id="btCreate" layoutX="267.0" layoutY="107.0" mnemonicParsing="false" onAction="#CustomizeGroup" prefHeight="33.0" prefWidth="173.0" style="-fx-background-color: #2580db;" text="Create" textFill="WHITE">
+      <Button fx:id="btCreate" layoutX="267.0" layoutY="107.0" mnemonicParsing="false" onAction="#caGroup" prefHeight="33.0" prefWidth="173.0" style="-fx-background-color: #2580db;" text="Create" textFill="WHITE">
          <font>
             <Font name="UTMAvoBold" size="14.0" />
          </font></Button>

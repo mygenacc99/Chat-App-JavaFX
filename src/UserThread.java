@@ -37,7 +37,7 @@ public class UserThread extends Thread {
                 if(clientCommand.startsWith("*userLogin")){
                     this.userName = splited[1];
                     if (server.getUsers().contains(userName)){ // Check exist.
-                        writer.println("*loginfail");
+                        sendMessage("*loginfail");
                         break;
                     }
 
@@ -51,7 +51,7 @@ public class UserThread extends Thread {
                     server.addUser(userName);
                 }
 
-                if(clientCommand.equals("bye")){
+                if(clientCommand.equals("*bye")){
                     server.sendToAllUser("*userquit|"+userName, this);
                     server.removeUser(userName, this);
                     break;
@@ -65,13 +65,13 @@ public class UserThread extends Thread {
                 }
 
 
-                if(clientCommand.startsWith("*newgroup")){
+                if(clientCommand.startsWith("*cagroup")){
                     Set<String> listMember = new HashSet<>();
                     for(int i = 2; i<splited.length; i++){
                         listMember.add(splited[i]);
                     }
-                    server.CustomizeGroup(splited[1], listMember);
-                    server.sendToGroup("*newgroup|" + splited[1] +"|" + server.getListUserInGroup(splited[1]), userName, splited[1]);
+                    server.caGroup(splited[1], listMember);
+                    server.sendToGroup("*cagroup|" + splited[1] +"|" + server.getListUserInGroup(splited[1]), userName, splited[1]);
 
                     continue;
                 }

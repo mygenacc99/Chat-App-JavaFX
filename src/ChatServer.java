@@ -74,7 +74,7 @@ public class ChatServer {
         this.Users.add(user);
     }
 
-    void CustomizeGroup(String name, Set<String> Users) {
+    void caGroup(String name, Set<String> Users) {
         if (!Groups.containsKey(name))
             this.Groups.put(name, Users);
         else{

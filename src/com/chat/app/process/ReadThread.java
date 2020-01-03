@@ -127,7 +127,7 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                if (response.startsWith("*newgroup")) {
+                if (response.startsWith("*cagroup")) {
                     final String groupName = splited[1];
                     Set<String> members = new HashSet<>();
                     for (int i = 2; i < splited.length; i++) {

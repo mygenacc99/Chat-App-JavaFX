@@ -74,17 +74,18 @@ public class createGroupController implements Initializable {
         tfGroupName.setText(groupName);
         tfGroupName.setDisable(true);
         btCreate.setText("Add Member");
-        Set<String> selectedUsers = Client.GroupMembers.get(groupName);
-        ObservableList<String> selectedUser = FXCollections.observableArrayList(selectedUsers);
+
+        this.DefaultSelected = new HashSet<>(Client.GroupMembers.get(groupName));
+        ObservableList<String> selectedUser = FXCollections.observableArrayList(DefaultSelected);
         lvSelectedUser.setItems(selectedUser);
 
-        Set<String> all = Client.UserMessages.keySet();
+        Set<String> all = new HashSet<>(Client.UserMessages.keySet()) ;
         all.removeAll(selectedUser);
         ObservableList<String> Oball = FXCollections.observableArrayList(all);
         lvUser.setItems(Oball);
     }
 
-    public void CustomizeGroup() throws IOException {
+    public void caGroup() throws IOException {
         Set<String> set = new HashSet<>(this.list);
         String selectedUsers = Client.userName + "|";
         String groupName = tfGroupName.getText();
@@ -96,7 +97,7 @@ public class createGroupController implements Initializable {
         for (String user : set) {
             selectedUsers += user + "|";
         }
-        String command = "*newgroup|" + groupName + "|" + selectedUsers;
+        String command = "*cagroup|" + groupName + "|" + selectedUsers;
         Client.sendCommandToServer(command);  // *newgroup|groupname|name1|name2|...|
         Client.home.refreshListView();
         this.cG.close();

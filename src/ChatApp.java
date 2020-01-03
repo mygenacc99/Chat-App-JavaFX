@@ -26,7 +26,7 @@ public class ChatApp extends Application {
 
     @Override
     public void stop(){
-        Client.writer.println("bye");
+        Client.sendCommandToServer("*bye");
         // Save file
     }
 }
