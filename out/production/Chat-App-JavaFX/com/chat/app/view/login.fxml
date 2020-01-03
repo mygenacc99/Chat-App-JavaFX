@@ -11,16 +11,11 @@
    <children>
       <AnchorPane layoutX="-7.0" prefHeight="758.0" prefWidth="383.0" style="-fx-background-color: #2580db;">
          <children>
-            <Label layoutX="28.0" layoutY="274.0" text="CHAT APP" textFill="WHITE">
+            <Label layoutX="40.0" layoutY="304.0" text="HF Team" textFill="WHITE">
                <font>
                   <Font name="UTMAvoBold" size="63.0" />
                </font>
             </Label>
-            <Button fx:id="btExit" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="41.0" style="-fx-background-color: Transparent;" text="x" textFill="WHITE">
-               <font>
-                  <Font name="UTMAvoBold" size="33.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
       <Label layoutX="403.0" layoutY="297.0" prefHeight="26.0" prefWidth="149.0" text="Your name:">
@@ -38,7 +33,7 @@
             <Font size="26.0" />
          </font>
       </TextField>
-      <Button fx:id="btLogin" layoutX="586.0" layoutY="485.0" mnemonicParsing="false" onAction="#loginButtonClick" style="-fx-background-color: #2580db;" text="Join" textFill="WHITE">
+      <Button fx:id="btLogin" layoutX="532.0" layoutY="439.0" mnemonicParsing="false" onAction="#loginButtonClick" prefHeight="45.0" prefWidth="184.0" style="-fx-background-color: #2580db;" text="Join" textFill="WHITE">
          <font>
             <Font name="UTM Avo" size="24.0" />
          </font>

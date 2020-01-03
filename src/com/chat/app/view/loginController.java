@@ -15,12 +15,8 @@ import java.io.IOException;
 
 public class loginController {
 
-
-
     @FXML
     private TextField tfName;
-    @FXML
-    private TextField tfPass;
 
     public void loginButtonClick(ActionEvent actionEvent) throws IOException {
         String username = tfName.getText();

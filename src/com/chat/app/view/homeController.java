@@ -90,49 +90,52 @@ public class homeController implements Initializable {
         }
     }
 
-    public synchronized void showGroupFeatures(boolean show){
+    public void showGroupFeatures(boolean show) {
         taSend.setDisable(!show);
-            btSend.setDisable(!show);
-            lvGroupMembers.setVisible(!isUserChat);
-            btAddMember.setVisible(!isUserChat);
-            btQuitGroup.setVisible(!isUserChat);
+        btSend.setDisable(!show);
+        lvGroupMembers.setVisible(!isUserChat);
+        btAddMember.setVisible(!isUserChat);
+        btQuitGroup.setVisible(!isUserChat);
     }
 
-    public synchronized void refreshChatBox(){
+    public void refreshChatBox() {
         String text = "";
-        if(isUserChat){
-            text =Client.UserMessages.get(receiverName);
-        }
-        else{
-            text =Client.GroupMessages.get(receiverName);
+        if (isUserChat) {
+            text = Client.UserMessages.get(receiverName);
+        } else {
+            text = Client.GroupMessages.get(receiverName);
         }
         taMessages.setText(text);
     }
 
-    public synchronized void refreshListUserGroup(){
-        if(!isUserChat){
-            ObservableList<String> group = FXCollections.observableArrayList(Client.GroupMembers.get(receiverName));
+    public void refreshListUserGroup() {
+        if (!isUserChat) {
+            ObservableList<String> group;
+            if(Client.GroupMembers.containsKey(receiverName))
+                group = FXCollections.observableArrayList(Client.GroupMembers.get(receiverName));
+            else{
+                group = FXCollections.observableArrayList(new HashSet<>());
+            }
             lvGroupMembers.setItems(group);
         }
     }
 
-    public synchronized void refreshListView() throws IOException {
+    public void refreshListView() throws IOException {
         ObservableList<String> users = FXCollections.observableArrayList(Client.UserMessages.keySet());
         ObservableList<String> groups = FXCollections.observableArrayList(Client.GroupMessages.keySet());
         lvUser.setItems(users);
         lvGroup.setItems(groups);
     }
 
-    public synchronized void sendMessage(ActionEvent actionEvent) throws IOException {
-        String mess = Client.userName+":" + taSend.getText();
+    public void sendMessage(ActionEvent actionEvent) throws IOException {
+        String mess = Client.userName + ":" + taSend.getText();
 
-        taMessages.setText(taMessages.getText()+"\n"+mess);
-        if(isUserChat){
-        Client.sendMessage(mess, receiverName);
-        addMessage(mess, receiverName);
-        }
-        else{
-            Client.writer.println("*sendgroup|"+receiverName+"|"+mess);
+        taMessages.setText(taMessages.getText() + "\n" + mess);
+        if (isUserChat) {
+            Client.sendMessage(mess, receiverName);
+            addMessage(mess, receiverName);
+        } else {
+            Client.writer.println("*sendgroup|" + receiverName + "|" + mess);
             String old = Client.GroupMessages.get(receiverName);
             Client.GroupMessages.replace(receiverName, old + "\n" + mess);
             Client.home.refreshChatBox();
@@ -140,19 +143,17 @@ public class homeController implements Initializable {
         taSend.setText("");
     }
 
-    public synchronized void addMessage(String mess, String receiver){
+    public void addMessage(String mess, String receiver) {
         String oMess = Client.UserMessages.get(receiver);
-        Client.UserMessages.replace(receiver, oMess+"\n"+mess);
+        Client.UserMessages.replace(receiver, oMess + "\n" + mess);
     }
 
-    public synchronized void addUser(String user) throws IOException {
+    public void addUser(String user) throws IOException {
         Client.UserMessages.put(user, "");
         refreshListView();
     }
 
-
-
-    public synchronized void createGroup(ActionEvent actionEvent) throws IOException {
+    public void createGroup(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getResource("createGroup.fxml")));
@@ -168,8 +169,7 @@ public class homeController implements Initializable {
 
     }
 
-    public synchronized void addMemberToGroup(ActionEvent actionEvent) throws IOException {
-//        Client.writer.println("*luig|"+lbReceive.getText());
+    public void addMemberToGroup(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getResource("createGroup.fxml")));
         AnchorPane root = (AnchorPane) loader.load();
@@ -184,15 +184,15 @@ public class homeController implements Initializable {
         controller.setInfo(lbReceive.getText());
     }
 
-    public synchronized void quitGroup(ActionEvent actionEvent) throws IOException {
-        Client.writer.println("*quitgroup|"+receiverName);
+    public void quitGroup(ActionEvent actionEvent) throws IOException {
+        Client.writer.println("*quitgroup|" + receiverName);
         Client.GroupMessages.remove(receiverName);
         Client.home.refreshListView();
         isUserChat = true;
         showGroupFeatures(false);
     }
 
-    public synchronized void quit(ActionEvent actionEvent) throws IOException {
+    public void quit(ActionEvent actionEvent) throws IOException {
         Platform.exit();
     }
 }

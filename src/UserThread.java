@@ -18,10 +18,6 @@ public class UserThread extends Thread {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public void run() {
         try {
             InputStream input = socket.getInputStream();

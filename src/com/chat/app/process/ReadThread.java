@@ -46,7 +46,6 @@ public class ReadThread extends Thread {
                 if(response==null) break;
 
                 splited = response.split("\\|");
-                System.out.println("Received: " + response);
 
                 if (response.startsWith("*userquit")){ // *userquit|username
 
@@ -89,6 +88,7 @@ public class ReadThread extends Thread {
                         }
                     };
                     Platform.runLater(updater);
+                    continue;
                 }
 
                 if(response.startsWith("*newuser")){

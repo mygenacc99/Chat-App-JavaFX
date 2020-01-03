@@ -14,28 +14,6 @@ import java.net.URL;
 import java.util.*;
 
 public class createGroupController implements Initializable {
-
-    public void setcG(Stage cG) {
-        this.cG = cG;
-    }
-
-    String groupName = "";
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    private Stage cG;
-    private boolean isCreate = true;
-
-    public void setCreate(boolean create) {
-        isCreate = create;
-    }
-
-    String selectedUsers = Client.userName + "|";
-    Set<String> list = new HashSet<>();
-    Set<String> DefaultSelected = new HashSet<>();
-
     @FXML
     private Button btCreate;
     @FXML
@@ -45,6 +23,28 @@ public class createGroupController implements Initializable {
     private TextField tfGroupName;
     @FXML
     private ListView lvSelectedUser;
+
+    private String groupName = "";
+    private Stage cG;
+    private Set<String> list = new HashSet<>();
+    private Set<String> DefaultSelected = new HashSet<>();
+    private boolean isCreate = true;
+
+    public void setcG(Stage cG) {
+        this.cG = cG;
+    }
+
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+
+    public void setCreate(boolean create) {
+        isCreate = create;
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DefaultSelected.add(Client.userName);
@@ -69,7 +69,7 @@ public class createGroupController implements Initializable {
 
     }
 
-    public synchronized void setInfo(String groupName) {
+    public void setInfo(String groupName) {
         isCreate = false;
         tfGroupName.setText(groupName);
         tfGroupName.setDisable(true);
@@ -80,20 +80,20 @@ public class createGroupController implements Initializable {
 
         Set<String> all = Client.UserMessages.keySet();
         all.removeAll(selectedUser);
-        ObservableList<String> Oball= FXCollections.observableArrayList(all);
+        ObservableList<String> Oball = FXCollections.observableArrayList(all);
         lvUser.setItems(Oball);
     }
 
-    public synchronized void CustomizeGroup() throws IOException {
+    public void CustomizeGroup() throws IOException {
         Set<String> set = new HashSet<>(this.list);
         String selectedUsers = Client.userName + "|";
         String groupName = tfGroupName.getText();
-        if( !Client.GroupMessages.containsKey(groupName)){
-            Client.GroupMessages.put(groupName,groupName + " has created!");
+        if (!Client.GroupMessages.containsKey(groupName)) {
+            Client.GroupMessages.put(groupName, groupName + " has created!");
         }
 
         Client.GroupMembers.put(groupName, set);
-        for(String user : set) {
+        for (String user : set) {
             selectedUsers += user + "|";
         }
         Client.writer.println("*newgroup|" + groupName + "|" + selectedUsers);  // *newgroup|groupname|name1|name2|...|

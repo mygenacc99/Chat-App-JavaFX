@@ -47,7 +47,6 @@ public class Client {
         writer.println(userName);
         String response = reader.readLine();
 //        response = response.replaceFirst(".$","");
-        System.out.println(response);
         String splited[] = response.split("\\|");
 
         Map<String, String> rs = new HashMap<>();
@@ -59,7 +58,6 @@ public class Client {
     }
 
     public static void sendMessage(String mess,String receiver){
-        System.out.println("Client send: " + receiver+"|"+mess);
         writer.println(receiver+"|"+mess);
     }
 
