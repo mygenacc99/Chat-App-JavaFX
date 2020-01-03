@@ -21,7 +21,6 @@ public class ChatApp extends Application {
 
 
     public static void main(String[] args) {
-        Client.init();
         launch(args);
     }
 

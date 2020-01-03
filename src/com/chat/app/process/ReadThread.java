@@ -2,22 +2,14 @@ package com.chat.app.process;
 
 
 
-import com.chat.app.view.createGroupController;
-import com.chat.app.view.homeController;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -40,21 +32,48 @@ public class ReadThread extends Thread {
 
     public void run() {
         String splited[];
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
                 String response = reader.readLine();
-                if(response==null) break;
-
+                if (response == null) break;
+                System.out.println(response);
                 splited = response.split("\\|");
 
-                if (response.startsWith("*userquit")){ // *userquit|username
+                if (response.startsWith("*loginfail")) {
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            Client.login.loginFail();
+                        }
+                    };
+                    Platform.runLater(updater);
+                    break;
+                }
+                if(response.startsWith("*listUser")){
+                    for(int i = 1; i<splited.length; i++){
+                        if(!splited[i].isEmpty()) Client.UserMessages.put(splited[i], "");
+                    }
+                    Runnable updater = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Client.login.loginSuccess();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    Platform.runLater(updater);
+                    continue;
+                }
 
+                if (response.startsWith("*userquit")) { // *userquit|username
                     Client.UserMessages.remove(splited[1]);
 
                     final String quittedUser = splited[1];
 
                     Client.GroupMembers.keySet().forEach((String groupName) -> {
-                        if (Client.GroupMembers.get(groupName).contains(quittedUser)){
+                        if (Client.GroupMembers.get(groupName).contains(quittedUser)) {
 
                             String old = Client.GroupMessages.get(groupName);
                             Client.GroupMessages.replace(groupName, old + "\n" + quittedUser + " has quit!");
@@ -79,7 +98,7 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                if(response.startsWith("*quitgroup")){
+                if (response.startsWith("*quitgroup")) {
                     Client.GroupMembers.get(splited[1]).remove(splited[2]);
                     Runnable updater = new Runnable() {
                         @Override
@@ -91,7 +110,7 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                if(response.startsWith("*newuser")){
+                if (response.startsWith("*newuser")) {
                     String newUser = response.substring(8);
 
                     Runnable updater = new Runnable() {
@@ -109,19 +128,18 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                if (response.startsWith("*newgroup")){
+                if (response.startsWith("*newgroup")) {
                     final String groupName = splited[1];
                     Set<String> members = new HashSet<>();
-                    for(int i = 2; i<splited.length; i++){
+                    for (int i = 2; i < splited.length; i++) {
                         members.add(splited[i]);
                     }
                     System.out.println(members);
-                    if (!Client.GroupMessages.containsKey(groupName)){
+                    if (!Client.GroupMessages.containsKey(groupName)) {
                         Client.GroupMessages.put(groupName, groupName + " has created!");
-                    }
-                    else{
-                        members.forEach((String username) ->{
-                            if(!Client.GroupMembers.get(groupName).contains(username)){
+                    } else {
+                        members.forEach((String username) -> {
+                            if (!Client.GroupMembers.get(groupName).contains(username)) {
                                 String old = Client.GroupMessages.get(groupName);
                                 Client.GroupMessages.replace(groupName, old + "\n" + username + " has joined!");
                             }
@@ -144,8 +162,8 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                if (response.startsWith("*sendgroup")){
-                    if(splited.length<3) continue;
+                if (response.startsWith("*sendgroup")) {
+                    if (splited.length < 3) continue;
                     String old = Client.GroupMessages.get(splited[1]);
                     Client.GroupMessages.replace(splited[1], old + "\n" + splited[2]);
 
@@ -159,7 +177,7 @@ public class ReadThread extends Thread {
                     continue;
                 }
 
-                Client.home.addMessage( splited[1], splited[0]);
+                Client.home.addMessage(splited[1], splited[0]);
                 Runnable updater = new Runnable() {
                     @Override
                     public void run() {
@@ -167,12 +185,13 @@ public class ReadThread extends Thread {
                     }
                 };
                 Platform.runLater(updater);
-            } catch (IOException ex) {
-                System.out.println("Error reading from server: " + ex.getMessage());
-                ex.printStackTrace();
-                break;
             }
+            socket.close();
+        } catch (IOException ex) {
+            System.out.println("Error reading from server: " + ex.getMessage());
+            ex.printStackTrace();
         }
+
     }
 
 

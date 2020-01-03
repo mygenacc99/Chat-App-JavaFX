@@ -1,6 +1,7 @@
 package com.chat.app.process;
 
 import com.chat.app.view.homeController;
+import com.chat.app.view.loginController;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -19,7 +20,9 @@ public class Client {
     public static Map<String, String> UserMessages = new HashMap<String, String>();
     public static Map<String, String> GroupMessages = new HashMap<String, String>();
     public static Map<String, Set<String>> GroupMembers = new HashMap<>();
+    public static loginController login;
     public static homeController home;
+
 
     public static void init() {
         try {
@@ -28,9 +31,8 @@ public class Client {
             OutputStream os = socket.getOutputStream();
             writer = new PrintWriter(os, true);
 
-            InputStream is = socket.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(is));
-
+            ReadThread readThread = new ReadThread(socket);
+            readThread.start();
 
         } catch (UnknownHostException ex) {
             System.out.println("Server not found: " + ex.getMessage());
@@ -39,26 +41,12 @@ public class Client {
         }
     }
 
-    public static void login(){
-        writer.println(userName);
+    public static void loginCommand(){
+        writer.println("*userLogin" + "|" + userName);
     }
 
-    public static Map<String, String> getChats() throws IOException {
-        writer.println(userName);
-        String response = reader.readLine();
-//        response = response.replaceFirst(".$","");
-        String splited[] = response.split("\\|");
-
-        Map<String, String> rs = new HashMap<>();
-        for(String s: splited){
-            if(!s.isEmpty())
-                rs.put(s, "");
-        }
-        return rs;
-    }
-
-    public static void sendMessage(String mess,String receiver){
-        writer.println(receiver+"|"+mess);
+    public static void sendCommandToServer(String command){
+        writer.println(command);
     }
 
 }

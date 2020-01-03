@@ -48,12 +48,11 @@ public class homeController implements Initializable {
     private ReadThread rthread;
     boolean isUserChat = true;
     private String receiverName = "";
-
+    String command = "";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Client.home = this;
-            Client.UserMessages = Client.getChats();
             lbUser.setText(Client.userName);
             refreshListView();
 
@@ -81,9 +80,6 @@ public class homeController implements Initializable {
                     showGroupFeatures(true);
                 }
             });
-
-            rthread = new ReadThread(Client.socket);
-            rthread.start();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,10 +128,12 @@ public class homeController implements Initializable {
 
         taMessages.setText(taMessages.getText() + "\n" + mess);
         if (isUserChat) {
-            Client.sendMessage(mess, receiverName);
+            command = mess + "|" + receiverName;
+            Client.sendCommandToServer(mess);
             addMessage(mess, receiverName);
         } else {
-            Client.writer.println("*sendgroup|" + receiverName + "|" + mess);
+            command = "*sendgroup|" + receiverName + "|" + mess;
+            Client.sendCommandToServer(command);
             String old = Client.GroupMessages.get(receiverName);
             Client.GroupMessages.replace(receiverName, old + "\n" + mess);
             Client.home.refreshChatBox();
@@ -185,7 +183,8 @@ public class homeController implements Initializable {
     }
 
     public void quitGroup(ActionEvent actionEvent) throws IOException {
-        Client.writer.println("*quitgroup|" + receiverName);
+        command = "*quitgroup|" + receiverName;
+        Client.sendCommandToServer(command);
         Client.GroupMessages.remove(receiverName);
         Client.home.refreshListView();
         isUserChat = true;

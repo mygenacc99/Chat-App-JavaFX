@@ -8,16 +8,19 @@
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/process/ReadThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/createGroupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/createGroupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/homeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chat-App-JavaFX/com/chat/app/view/loginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chat/app/process/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chat/app/process/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chat/app/process/ReadThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chat/app/process/ReadThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chat/app/view/createGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chat/app/view/createGroupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chat/app/view/homeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chat/app/view/homeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chat/app/view/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chat/app/view/loginController.java" afterDir="false" />
     </list>
@@ -282,7 +285,8 @@
       <workItem from="1577899237238" duration="56000" />
       <workItem from="1577975332425" duration="2820000" />
       <workItem from="1578020833567" duration="4464000" />
-      <workItem from="1578025414660" duration="7078000" />
+      <workItem from="1578025414660" duration="13204000" />
+      <workItem from="1578043640914" duration="6644000" />
     </task>
     <servers />
   </component>

@@ -26,25 +26,7 @@ public class UserThread extends Thread {
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
 
-            /*
-                Login.
-             */
-            String uName = reader.readLine();
-            this.userName = uName;
-            System.out.println(userName + " logins.");
-            /*
-                Send list of online user to new user.
-                And save the new user
-             */
             String serverMessage = "";
-            for(String user:server.getUsers()){  // Get all users on server.
-                serverMessage += user + "|";
-            }
-            server.sendToUser(serverMessage, userName);
-            server.sendToAllUser("*newuser"+userName, this);
-            server.addUser(userName);
-
-
             String clientCommand;
             String splited[];
             do {
@@ -52,9 +34,26 @@ public class UserThread extends Thread {
                 System.out.println("Client sended:" + clientCommand);
                 splited = clientCommand.split("\\|");
 
+                if(clientCommand.startsWith("*userLogin")){
+                    this.userName = splited[1];
+                    if (server.getUsers().contains(userName)){ // Check exist.
+                        writer.println("*loginfail");
+                        break;
+                    }
+
+                    System.out.println(userName + " logins.");
+
+                    for(String user:server.getUsers()){  // Get all users on server.
+                        serverMessage += user + "|";
+                    }
+                    server.sendToUser("*listUser" + "|"+ serverMessage, userName);
+                    server.sendToAllUser("*newuser"+userName, this);
+                    server.addUser(userName);
+                }
 
                 if(clientCommand.equals("bye")){
                     server.sendToAllUser("*userquit|"+userName, this);
+                    server.removeUser(userName, this);
                     break;
                 }
 
@@ -85,12 +84,11 @@ public class UserThread extends Thread {
 
                 // splited[0]: receiver, [1]: message
                 if(splited.length < 2) continue;
-                serverMessage = uName + "|" + splited[1]; // Format: [name]: message
+                serverMessage = userName + "|" + splited[1]; // Format: [name]: message
                 server.sendToUser(serverMessage, splited[0]);
 
             } while (true);
 
-            server.removeUser(uName, this);
             socket.close();
 
         } catch (IOException ex) {
