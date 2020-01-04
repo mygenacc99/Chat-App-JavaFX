@@ -29,8 +29,6 @@ public class homeController implements Initializable {
     @FXML
     private ListView lvGroup;
     @FXML
-    private TextField tfSearch;
-    @FXML
     private Label lbReceive;
     @FXML
     private TextArea taMessages;
@@ -125,19 +123,22 @@ public class homeController implements Initializable {
 
     public void sendMessage(ActionEvent actionEvent) throws IOException {
         String mess = Client.userName + ":" + taSend.getText();
+        String messReplace = mess.replace("\n","<br>");
 
+        System.out.println(mess);
         taMessages.setText(taMessages.getText() + "\n" + mess);
         if (isUserChat) {
-            command = "*sendUser" + "|" + receiverName +"|" + mess;
+            command = "*sendUser" + "|" + receiverName +"|" + messReplace;
             Client.sendCommandToServer(command);
             addMessage(mess, receiverName);
         } else {
-            command = "*sendgroup|" + receiverName + "|" + mess;
+            command = "*sendgroup|" + receiverName + "|" +messReplace;
             Client.sendCommandToServer(command);
             String old = Client.GroupMessages.get(receiverName);
             Client.GroupMessages.replace(receiverName, old + "\n" + mess);
             Client.home.refreshChatBox();
         }
+        System.out.println(command);
         taSend.setText("");
     }
 

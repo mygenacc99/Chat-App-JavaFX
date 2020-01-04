@@ -36,7 +36,6 @@ public class ReadThread extends Thread {
             while (!Thread.currentThread().isInterrupted()) {
                 String response = reader.readLine();
                 if (response == null) break;
-                System.out.println(response);
                 splited = response.split("\\|");
 
                 if (response.startsWith("*loginfail")) {
@@ -162,6 +161,8 @@ public class ReadThread extends Thread {
                 }
 
                 if (response.startsWith("*sendgroup")) {
+
+                    splited[2] = splited[2].replace("<br>","\n");
                     if (splited.length < 3) continue;
                     String old = Client.GroupMessages.get(splited[1]);
                     Client.GroupMessages.replace(splited[1], old + "\n" + splited[2]);
@@ -177,6 +178,8 @@ public class ReadThread extends Thread {
                 }
 
                 if (response.startsWith("*sendUser")){
+
+                    splited[2] = splited[2].replace("<br>","\n");
                     Client.home.addMessage(splited[2], splited[1]);
                     Runnable updater = new Runnable() {
                         @Override
